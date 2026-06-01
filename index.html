@@ -1,0 +1,107 @@
+
+&lt;!DOCTYPE html&gt;
+&lt;html lang="zh-CN"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;五子棋 - Gomoku&lt;/title&gt;
+    &lt;link rel="preconnect" href="https://fonts.googleapis.com"&gt;
+    &lt;link rel="preconnect" href="https://fonts.gstatic.com" crossorigin&gt;
+    &lt;link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&amp;family=Inter:wght@300;400;500;600&amp;display=swap" rel="stylesheet"&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;div class="particles" id="particles"&gt;&lt;/div&gt;
+    
+    &lt;div class="container"&gt;
+        &lt;header class="header"&gt;
+            &lt;h1 class="title"&gt;五子棋&lt;/h1&gt;
+            &lt;p class="subtitle"&gt;Gomoku&lt;/p&gt;
+        &lt;/header&gt;
+
+        &lt;main class="game-container"&gt;
+            &lt;aside class="sidebar left"&gt;
+                &lt;div class="player-card" id="player-black"&gt;
+                    &lt;div class="player-avatar black"&gt;●&lt;/div&gt;
+                    &lt;div class="player-info"&gt;
+                        &lt;h3 class="player-name"&gt;黑棋&lt;/h3&gt;
+                        &lt;p class="player-status"&gt;先手&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class="turn-indicator" id="turn-black"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="game-controls"&gt;
+                    &lt;button class="btn btn-primary" id="restart-btn"&gt;
+                        &lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+                            &lt;path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/&gt;
+                            &lt;path d="M3 3v5h5"/&gt;
+                        &lt;/svg&gt;
+                        重新开始
+                    &lt;/button&gt;
+                    &lt;button class="btn btn-secondary" id="undo-btn"&gt;
+                        &lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+                            &lt;path d="M3 7v6h6"/&gt;
+                            &lt;path d="M21 17a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 13"/&gt;
+                        &lt;/svg&gt;
+                        悔棋
+                    &lt;/button&gt;
+                &lt;/div&gt;
+
+                &lt;div class="game-stats"&gt;
+                    &lt;h4&gt;游戏统计&lt;/h4&gt;
+                    &lt;div class="stat-item"&gt;
+                        &lt;span&gt;总步数&lt;/span&gt;
+                        &lt;span id="move-count"&gt;0&lt;/span&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/aside&gt;
+
+            &lt;div class="board-container"&gt;
+                &lt;div class="board-wrapper"&gt;
+                    &lt;canvas id="board" class="board"&gt;&lt;/canvas&gt;
+                    &lt;div class="board-overlay" id="board-overlay"&gt;
+                        &lt;div class="game-over-modal" id="game-over-modal"&gt;
+                            &lt;h2 id="winner-text"&gt;黑棋获胜！&lt;/h2&gt;
+                            &lt;button class="btn btn-primary" id="play-again-btn"&gt;再来一局&lt;/button&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div class="game-status" id="game-status"&gt;
+                    &lt;span class="status-text"&gt;黑棋先行&lt;/span&gt;
+                &lt;/div&gt;
+            &lt;/div&gt;
+
+            &lt;aside class="sidebar right"&gt;
+                &lt;div class="player-card" id="player-white"&gt;
+                    &lt;div class="player-avatar white"&gt;●&lt;/div&gt;
+                    &lt;div class="player-info"&gt;
+                        &lt;h3 class="player-name"&gt;白棋&lt;/h3&gt;
+                        &lt;p class="player-status"&gt;后手&lt;/p&gt;
+                    &lt;/div&gt;
+                    &lt;div class="turn-indicator" id="turn-white"&gt;&lt;/div&gt;
+                &lt;/div&gt;
+
+                &lt;div class="chat-container"&gt;
+                    &lt;h4&gt;聊天&lt;/h4&gt;
+                    &lt;div class="chat-messages" id="chat-messages"&gt;
+                        &lt;div class="chat-message system"&gt;
+                            &lt;p&gt;游戏开始！黑棋先行&lt;/p&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class="chat-input"&gt;
+                        &lt;input type="text" id="chat-input" placeholder="输入消息..." maxlength="100"&gt;
+                        &lt;button class="btn-send" id="send-btn"&gt;
+                            &lt;svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"&gt;
+                                &lt;line x1="22" y1="2" x2="11" y2="13"/&gt;
+                                &lt;polygon points="22 2 15 22 11 13 2 9 22 2"/&gt;
+                            &lt;/svg&gt;
+                        &lt;/button&gt;
+                    &lt;/div&gt;
+                &lt;/div&gt;
+            &lt;/aside&gt;
+        &lt;/main&gt;
+    &lt;/div&gt;
+
+    &lt;script src="script.js"&gt;&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;
